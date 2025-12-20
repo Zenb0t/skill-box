@@ -44,6 +44,46 @@ Comprehensive Test-Driven Development workflow skill that reads project plans an
 - "Generate test cases for a shopping cart feature"
 - "Write JUnit tests for this authentication requirement"
 
+### vitest-tdd
+
+Specialized TDD skill for Vitest - the blazing fast unit test framework powered by Vite.
+
+**Capabilities:**
+- Vitest-specific test generation and scaffolding
+- React, Vue, and Svelte component testing
+- Advanced mocking with `vi` utilities
+- Snapshot testing patterns
+- Vite integration and optimization
+- Native ESM support
+- Coverage configuration with c8/v8
+- UI mode for interactive testing
+
+**Supported Testing:**
+- **Unit Tests**: Pure functions, utilities, business logic
+- **Component Tests**: React, Vue, Svelte with Testing Library
+- **Integration Tests**: API clients, services, workflows
+- **Async Tests**: Promises, async/await, timers
+- **Snapshot Tests**: Component rendering, output consistency
+
+**Use Cases:**
+- Testing Vite-powered applications
+- React/Vue/Svelte component testing
+- Modern JavaScript/TypeScript testing
+- Fast test execution with HMR
+- Interactive debugging with UI mode
+
+**Installation:**
+```bash
+# Upload vitest-tdd.skill to Claude Code via Settings → Skills
+```
+
+**Usage Examples:**
+- "Generate Vitest tests for this password validator"
+- "Create React component tests with Testing Library"
+- "Write async tests with vi.useFakeTimers()"
+- "Generate snapshot tests for this component"
+- "Mock fetch API calls in Vitest"
+
 ## TDD Principles
 
 This category focuses on **Test-Driven Development**, which follows the cycle:
@@ -110,17 +150,29 @@ describe('Feature')
 - **Integration Tests**: Critical user paths
 - **E2E Tests**: Key user journeys
 
+## Skill Comparison
+
+| Feature | tdd-workflow | vitest-tdd |
+|---------|--------------|------------|
+| **Languages** | Multi-language | JavaScript/TypeScript |
+| **Frameworks** | 10+ frameworks | Vitest only |
+| **Component Testing** | No | Yes (React/Vue/Svelte) |
+| **Mocking** | Generic patterns | Vitest `vi` utilities |
+| **Configuration** | Generic | Vitest-specific |
+| **Best For** | Any language/framework | Vite-based projects |
+
 ## Future Skills
 
 Planned additions to this category:
 
-- **integration-testing** - API and integration testing patterns
-- **e2e-testing** - End-to-end testing with Playwright/Cypress
+- **jest-tdd** - Specialized Jest TDD skill
+- **playwright-e2e** - End-to-end testing with Playwright
+- **cypress-e2e** - End-to-end testing with Cypress
 - **contract-testing** - API contract testing with Pact
 - **mutation-testing** - Test quality validation
 - **property-testing** - Property-based testing (QuickCheck, Hypothesis)
 - **performance-testing** - Load and performance testing
-- **snapshot-testing** - Visual regression testing
+- **visual-testing** - Visual regression testing
 
 ## Testing Resources
 
