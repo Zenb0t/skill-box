@@ -1,140 +1,202 @@
-# Skillbox
+# Skill Box
 
-A curated collection of reusable skills for LLM agents, following the [Claude Code Skill protocol](https://docs.claudecode.com/features/skills).
+> A curated collection of AI agent skills for Claude Code and other LLMs, following the Agente Skill protocol.
 
 ## Overview
 
-Skillbox is a repository designed to document, organize, and share skills across projects. All skills are MIT licensed, making them freely usable in any project.
+Skill Box is an organized repository of custom skills that enhance AI agents with specialized capabilities. These skills enable AI assistants to perform complex tasks across development, infrastructure, UI design, and more.
 
 ## Available Skills
 
-### 🔄 GitHub Workflow
-**File:** `skills/github-workflow.skill`
+### 🛠️ Development Tools
+Located in `skills/development/`
 
-Provides comprehensive GitHub workflow support including:
-- Conventional commits standards
-- Pull request templates and best practices
-- GitHub Actions workflow patterns
-- Code review guidelines
+- **github-workflow** - GitHub workflow automation and CI/CD management
+  - Create and manage GitHub Actions workflows
+  - Handle pull requests and issues
+  - Follow conventional commit standards
 
-### 🎨 shadcn/ui
-**File:** `skills/shadcn-ui-skill.skill`
+### 🏗️ Infrastructure
+Located in `skills/infrastructure/`
 
-Complete shadcn/ui component library integration:
-- Component catalog and usage patterns
-- Form building with React Hook Form + Zod
-- Data table implementations
-- Project structure templates
-- Styling and theming guidance
+- **supabase-cli** - Supabase database and backend management
+  - Database migrations and management
+  - Authentication setup
+  - Real-time subscriptions
+  - Edge functions
 
-### 🗄️ Supabase CLI
-**File:** `skills/supabase-cli.skill`
+### 🎨 UI Components
+Located in `skills/ui-components/`
 
-Supabase command-line interface expertise:
-- Database management commands
-- Migration workflows
-- Authentication setup
-- Edge functions deployment
-- Local development setup
+- **shadcn-ui** - Modern UI component library integration
+  - Component installation and configuration
+  - Form building with validation
+  - Data tables and complex UI patterns
+  - Tailwind CSS integration
 
-### 🛠️ Skill Creator
-**File:** `skills/skill-creator.skill`
+### 🧪 Testing
+Located in `skills/testing/`
 
-Meta-skill for creating new skills:
-- Complete skill creation workflow and best practices
-- Progressive disclosure design principles
-- Bundled scripts for initialization, validation, and packaging
-- Reference guides for workflows and output patterns
-- Helper scripts to streamline skill development process
+- **tdd-workflow** - Test-Driven Development workflow and test generation
+  - Read plans and generate test cases
+  - Support for multiple languages and frameworks
+  - TDD Red-Green-Refactor cycle
+  - Test scaffolding and best practices
+  - Edge case identification
+
+- **vitest-tdd** - Specialized TDD for Vitest framework
+  - Vitest-specific test generation
+  - React, Vue, Svelte component testing
+  - Advanced mocking with vi utilities
+  - Snapshot testing patterns
+  - Vite integration and optimization
+
+### 🔧 Meta Tools
+Located in `skills/meta-tools/`
+
+- **skill-creator** - Create new skills following best practices
+  - Skill scaffolding and structure
+  - Template generation
+  - Validation and packaging
 
 ## Installation
 
-### Installing Skills in Claude Code
+### For Claude Code (Web)
 
-To use these skills with Claude Code, you can install them using the skill installation feature:
+1. Navigate to Settings → Skills
+2. Click "Add Skill"
+3. Upload the `.skill` file from this repository
+4. The skill will be available immediately
+
+### For Claude Code CLI
 
 ```bash
 # Install a specific skill
-claude skill install /path/to/skillbox/skills/github-workflow.skill
+claude skill install /path/to/skill-box/skills/development/github-workflow.skill
 
-# Or install all skills
-claude skill install /path/to/skillbox/skills/*.skill
+# Or install multiple skills
+claude skill install /path/to/skill-box/skills/**/*.skill
 ```
 
-Alternatively, you can copy the `.skill` files to your Claude Code skills directory:
+### Manual Installation
 
 ```bash
+# Copy to Claude Code skills directory
 # On Windows
-cp skills/*.skill %USERPROFILE%\.claude\skills\
+cp skills/**/*.skill %USERPROFILE%\.claude\skills\
 
 # On macOS/Linux
-cp skills/*.skill ~/.claude/skills/
+cp skills/**/*.skill ~/.claude/skills/
 ```
 
-### Using Skills
+### For Local Development
 
-Once installed, you can invoke skills in your conversations with Claude Code:
+```bash
+# Clone the repository
+git clone https://github.com/Zenb0t/skill-box.git
+cd skill-box
 
-```
-/github-workflow - Access GitHub workflow patterns
-/shadcn-ui - Get shadcn/ui component help
-/supabase-cli - Use Supabase CLI commands
-/skill-creator - Create new skills with best practices
+# Skills are packaged as .skill files (ZIP archives)
+# Extract a skill to examine its contents:
+unzip skills/development/github-workflow.skill -d extracted/
 ```
 
 ## Repository Structure
 
 ```
-skillbox/
-├── skills/              # All skill files (.skill format)
-│   ├── github-workflow.skill
-│   ├── shadcn-ui-skill.skill
-│   ├── skill-creator.skill
-│   └── supabase-cli.skill
-├── LICENSE             # MIT License
-└── README.md           # This file
+skill-box/
+├── README.md                          # This file
+├── CONTRIBUTING.md                    # How to contribute new skills
+├── docs/
+│   └── SKILL_TEMPLATE.md             # Template for creating new skills
+├── skills/
+│   ├── development/                   # Development tools and workflows
+│   │   ├── README.md
+│   │   └── github-workflow.skill
+│   ├── infrastructure/                # Backend and infrastructure tools
+│   │   ├── README.md
+│   │   └── supabase-cli.skill
+│   ├── ui-components/                 # Frontend and UI libraries
+│   │   ├── README.md
+│   │   └── shadcn-ui-skill.skill
+│   ├── testing/                       # Testing and TDD tools
+│   │   ├── README.md
+│   │   ├── tdd-workflow.skill
+│   │   └── vitest-tdd.skill
+│   └── meta-tools/                    # Tools for creating and managing skills
+│       ├── README.md
+│       └── skill-creator.skill
+└── LICENSE
 ```
 
-## Skill Format
+## Usage
 
-Skills follow the Claude Code skill protocol, packaged as `.skill` files (ZIP archives) containing:
-- `SKILL.md` - Main skill documentation and instructions (required)
-- `scripts/` - Executable code for deterministic tasks (optional)
-- `references/` - Reference materials and examples (optional)
-- `assets/` - Templates, code snippets, and other resources (optional)
+Once a skill is installed, you can invoke it by using the skill name in your conversation with Claude:
+
+```
+/skill github-workflow
+```
+
+Or simply mention the task related to the skill, and Claude will automatically use the appropriate skill when needed.
+
+## Creating New Skills
+
+Want to add your own skill to the collection? Check out:
+
+1. **[CONTRIBUTING.md](CONTRIBUTING.md)** - Guidelines for contributing
+2. **[docs/SKILL_TEMPLATE.md](docs/SKILL_TEMPLATE.md)** - Skill template and structure
+3. **skill-creator skill** - Use the meta-tool to scaffold new skills
+
+### Quick Start
+
+```bash
+# Use the skill-creator skill to generate a new skill
+# This will create the proper directory structure and files
+```
+
+## Skill Categories
+
+Skills are organized into categories for easy discovery and management:
+
+- **development/** - Git, CI/CD, code quality tools
+- **infrastructure/** - Databases, cloud services, DevOps tools
+- **ui-components/** - UI libraries, design systems, component frameworks
+- **testing/** - Test-Driven Development, testing frameworks, quality assurance
+- **meta-tools/** - Tools for managing and creating skills
 
 ## Contributing
 
-Contributions are welcome! To add a new skill:
+We welcome contributions! Whether you want to:
 
-1. Fork this repository
-2. Create your skill following the skill protocol format
-3. Place it in the `skills/` directory
-4. Update this README with skill details
-5. Submit a pull request
+- Add a new skill
+- Improve existing skills
+- Fix bugs or documentation
+- Suggest new categories
 
-### Skill Guidelines
-
-- Follow the Claude Code skill protocol structure
-- Include comprehensive documentation
-- Provide practical examples and templates
-- Use clear, concise language
-- Test the skill before submitting
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## License
 
-All skills in this repository are licensed under the MIT License. See [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+All skills in this repository are MIT licensed, making them freely usable in any project.
 
 ## Resources
 
-- [Claude Code Documentation](https://docs.claudecode.com)
-- [Skill Development Guide](https://docs.claudecode.com/features/skills)
-- [Agente SDK](https://github.com/anthropics/agente)
+- [Agente Skill Protocol](https://github.com/anthropics/claude-code) - Official skill specification
+- [Claude Code Documentation](https://docs.anthropic.com/claude/docs) - Claude Code guides
+- [Claude Code Skill Development](https://docs.claudecode.com/features/skills) - Skill development guide
 
-## About
+## Roadmap
 
-Created and maintained by [@Zenb0t](https://github.com/Zenb0t)
+Future skill categories we're planning to add:
+
+- **data-science/** - Data analysis, ML, visualization tools
+- **security/** - Security scanning, auditing, best practices
+- **documentation/** - API docs, code documentation tools
+- **deployment/** - Deployment automation, container management
+- **api-development/** - API design, documentation, testing tools
 
 ---
 
-**Note:** These skills are designed for use with Claude Code and compatible LLM agent frameworks that support the skill protocol.
+**Made with ❤️ for the AI agent community**
