@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+// Import the CLI using Bun's module resolution
+import('../dist/cli/index.js');

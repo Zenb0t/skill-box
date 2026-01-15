@@ -1,0 +1,59 @@
+llm:
+  provider: anthropic
+  model: claude-sonnet-4-20250514
+  api_key_env: ANTHROPIC_API_KEY
+  max_tokens: 8192
+  temperature: 0.7
+
+context:
+  default_paths:
+    - README.md
+    - /docs
+    - /guides
+    - .cursor/rules
+    - .claude
+  max_file_size: 102400  # 100KB in bytes
+  max_total_context: 51200  # 50KB in bytes
+  prioritization:
+    - type: documentation
+      weight: 1.0
+    - type: guide
+      weight: 0.8
+    - type: code
+      weight: 0.5
+  cache:
+    enabled: true
+    ttl: 300  # 5 minutes
+    watch: true
+
+tools:
+  shell:
+    enabled: true
+    require_confirmation: false
+    dry_run_default: false
+    allowed_commands:
+      - git
+      - npm
+      - pnpm
+      - yarn
+      - bun
+      - cat
+      - ls
+      - find
+      - grep
+    timeout: 30000  # 30 seconds in ms
+    sandbox:
+      network: false
+      filesystem_write: false
+      root_directory: "."
+
+output:
+  format: markdown  # markdown | json | plain
+  color: true
+  verbose: false
+  show_reasoning: false
+
+session:
+  enabled: false  # Disabled for v1
+  storage: /tmp/skill-harness
+  ttl: 3600
