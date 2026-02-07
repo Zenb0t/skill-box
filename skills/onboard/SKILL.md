@@ -112,6 +112,13 @@ Use the template from `references/agents-md-template.md`.
 **For Migrate mode:** Transform CLAUDE.md content into AGENTS.md format, preserving all information.
 **For Reconcile mode:** Flag conflicts between AGENTS.md and CLAUDE.md, suggest resolution.
 
+Include a verification section in the generated AGENTS.md:
+
+```markdown
+### Verification
+Evidence storage: `<path>` <!-- used by verify skill -->
+```
+
 Keep AGENTS.md under 500 lines. Use progressive disclosure — link to detailed docs rather than inlining everything.
 
 ### Step 6: Create or Detect Verify Script
@@ -151,6 +158,7 @@ Present the user with:
 - [ ] E2E test command: `__________` (detected Playwright config but no script)
 - [ ] Deploy command: `__________` (CI deploys but no local command found)
 - [ ] Secrets/env setup: `__________` (found .env.example but unclear requirements)
+- [ ] Verification evidence directory: `__________` (default: `docs/verification/`, can be gitignored)
 
 ### Next Steps
 1. Review generated AGENTS.md and fill in unknowns

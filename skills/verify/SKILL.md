@@ -68,6 +68,8 @@ Execute checks using the project's verify script or individual commands.
 
 **Otherwise**, run commands individually from AGENTS.md.
 
+**If neither exists**, infer the appropriate verification commands from the codebase and ask the user to confirm before running them. Suggest running the `onboard` skill afterward to formalize the setup.
+
 **Capture evidence** for each check:
 - Command run
 - Exit code
@@ -132,6 +134,10 @@ Stop and escalate to the user when:
 3. **Missing test coverage** — Flag that changed code has no test coverage.
 4. **Security change without tests** — Always flag security changes that lack test coverage.
 5. **Unknown verification method** — If you can't determine how to verify something, say so.
+6. **No test suite found** — If no test command exists and the verification level requires tests (Medium or above), stop and suggest writing tests. Tests are a prerequisite for meaningful verification — without them, the skill can only check lint/typecheck/build. Recommend at minimum:
+   - Unit tests for the changed code
+   - A regression test if fixing a bug
+   Flag this in the evidence bundle as a gap with Low confidence.
 
 For each stop condition, output:
 
@@ -174,4 +180,4 @@ Present the final verification summary:
 3. **Always show what was NOT checked** — gaps matter as much as passes
 4. **Adapt to the project** — use whatever tools the project already has
 5. **Ask about testing expectations** — most codebases have tests; ask the user which ones to run if unclear
-6. **Evidence is append-only** — never modify or delete previous verification results
+6. **Persist evidence to file** — write each verification run to the project's evidence directory (default: `docs/verification/`). Use the filename pattern `<branch>-<timestamp>.md`. Check AGENTS.md for a custom evidence path. If no directory is configured, ask the user where to store evidence or suggest running the `onboard` skill.

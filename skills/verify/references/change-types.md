@@ -163,11 +163,9 @@ If a change spans multiple categories, use the highest verification level.
 4. ✅ Build
 5. ✅ Security-specific tests (if available)
 6. ⚠ Manual review checklist:
-   - [ ] No secrets in code
-   - [ ] Input validation on all entry points
-   - [ ] Auth checks not bypassed
-   - [ ] Error messages don't leak sensitive info
-   - [ ] Cryptographic primitives used correctly
+   - First, check for existing security guidelines in the codebase (e.g., `SECURITY.md`, `docs/security/`, or security section in AGENTS.md)
+   - If project guidelines exist, use those as the primary checklist
+   - If none exist, use the built-in checklist from `references/security-checklist.md`
 
 **Key concern**: Security bugs are high-impact. Over-verify.
 
