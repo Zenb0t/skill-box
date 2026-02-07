@@ -38,7 +38,7 @@ Supabase command-line interface expertise:
 - Local development setup
 
 ### 🔍 Codebase Onboarding (onboard)
-**File:** `skills/onboard.skill`
+**Directory:** `skills/onboard/`
 
 Automated codebase onboarding that generates or augments AGENTS.md files:
 - Detects existing AGENTS.md/CLAUDE.md and selects operating mode (create/augment/migrate/reconcile)
@@ -49,7 +49,7 @@ Automated codebase onboarding that generates or augments AGENTS.md files:
 - Surfaces unknowns as checkboxes for human input
 
 ### ✅ Verification Workflow (verify)
-**File:** `skills/verify.skill`
+**Directory:** `skills/verify/`
 
 Structured verification before commits and PRs:
 - Classifies change types (refactor, feature, bug fix, security, etc.)
@@ -108,13 +108,13 @@ Once installed, you can invoke skills in your conversations with Claude Code:
 
 ```
 skillbox/
-├── skills/              # All skill files (.skill format)
+├── skills/              # All skill files
 │   ├── github-workflow.skill
-│   ├── onboard.skill
+│   ├── onboard/             # Unpacked skill (SKILL.md + references/)
 │   ├── shadcn-ui-skill.skill
 │   ├── skill-creator.skill
 │   ├── supabase-cli.skill
-│   └── verify.skill
+│   └── verify/              # Unpacked skill (SKILL.md + references/)
 ├── LICENSE             # MIT License
 └── README.md           # This file
 ```
