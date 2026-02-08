@@ -6,6 +6,18 @@ A curated collection of reusable skills for LLM agents, following the [Claude Co
 
 Skillbox is a repository designed to document, organize, and share skills across projects. All skills are MIT licensed, making them freely usable in any project.
 
+## Quick Download
+
+| Skill | Claude (.skill) | ZIP |
+|-------|-----------------|-----|
+| GitHub Workflow | [github-workflow.skill](https://github.com/Zenb0t/skill-box/releases/latest/download/github-workflow.skill) | — |
+| shadcn/ui | [shadcn-ui-skill.skill](https://github.com/Zenb0t/skill-box/releases/latest/download/shadcn-ui-skill.skill) | — |
+| Supabase CLI | [supabase-cli.skill](https://github.com/Zenb0t/skill-box/releases/latest/download/supabase-cli.skill) | — |
+| Codebase Onboarding | [onboard.skill](https://github.com/Zenb0t/skill-box/releases/latest/download/onboard.skill) | [onboard.zip](https://github.com/Zenb0t/skill-box/releases/latest/download/onboard.zip) |
+| Verification Workflow | [verify.skill](https://github.com/Zenb0t/skill-box/releases/latest/download/verify.skill) | [verify.zip](https://github.com/Zenb0t/skill-box/releases/latest/download/verify.zip) |
+| Skill Creator | [skill-creator.skill](https://github.com/Zenb0t/skill-box/releases/latest/download/skill-creator.skill) | — |
+| **All Skills** | [all-skills.zip](https://github.com/Zenb0t/skill-box/releases/latest/download/all-skills.zip) | — |
+
 ## Available Skills
 
 ### 🔄 GitHub Workflow
@@ -71,9 +83,19 @@ Meta-skill for creating new skills:
 
 ## Installation
 
-### Installing Skills in Claude Code
+### Download and Install
 
-To use these skills with Claude Code, you can install them using the skill installation feature:
+1. Download a `.skill` file from the [Quick Download](#quick-download) table above or the [latest release](https://github.com/Zenb0t/skill-box/releases/latest).
+
+2. Install the downloaded skill:
+
+```bash
+claude skill install ./github-workflow.skill
+```
+
+### Installing from a Local Clone
+
+If you've cloned this repo, you can install skills directly:
 
 ```bash
 # Install a specific skill
@@ -83,14 +105,16 @@ claude skill install /path/to/skillbox/skills/github-workflow.skill
 claude skill install /path/to/skillbox/skills/*.skill
 ```
 
-Alternatively, you can copy the `.skill` files to your Claude Code skills directory:
+### Manual Installation
+
+Copy `.skill` files to your Claude Code skills directory:
 
 ```bash
-# On Windows
-cp skills/*.skill %USERPROFILE%\.claude\skills\
-
 # On macOS/Linux
 cp skills/*.skill ~/.claude/skills/
+
+# On Windows
+cp skills/*.skill %USERPROFILE%\.claude\skills\
 ```
 
 ### Using Skills

@@ -1,0 +1,92 @@
+name: Package Skills
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "skills/**"
+      - ".github/workflows/package-skills.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: package-skills
+  cancel-in-progress: true
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Package skills into dist/
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+
+          # Track names to detect collisions
+          declare -A seen_names
+
+          # 1. Copy existing .skill files (already ZIP archives)
+          for f in skills/*.skill; do
+            [ -f "$f" ] || continue
+            name="$(basename "$f")"
+            echo ":: Copying $name"
+            cp "$f" "dist/$name"
+            seen_names["$name"]=1
+          done
+
+          # 2. Zip directory-based skills into .skill and .zip files
+          for d in skills/*/; do
+            [ -d "$d" ] || continue
+            base="$(basename "$d")"
+            skill_name="${base}.skill"
+            zip_name="${base}.zip"
+
+            # Collision check
+            if [[ -n "${seen_names[$skill_name]:-}" ]]; then
+              echo "ERROR: Collision detected — both a file and directory produce '$skill_name'"
+              exit 1
+            fi
+            seen_names["$skill_name"]=1
+
+            echo ":: Zipping $d -> $skill_name + $zip_name"
+            (cd "$d" && zip -r "../../dist/$skill_name" . -x '*.DS_Store' -x 'Thumbs.db')
+            cp "dist/$skill_name" "dist/$zip_name"
+          done
+
+          # 3. Verify no empty archives
+          for f in dist/*.skill; do
+            count="$(unzip -l "$f" 2>/dev/null | tail -1 | awk '{print $2}')"
+            if [ "$count" = "0" ] || [ -z "$count" ]; then
+              echo "ERROR: Empty archive detected: $f"
+              exit 1
+            fi
+          done
+
+          # 4. Create all-skills.zip bundle (skill files only)
+          (cd dist && zip all-skills.zip *.skill)
+
+          echo "--- dist/ contents ---"
+          ls -lh dist/
+
+      - name: Delete existing latest release
+        run: gh release delete latest --cleanup-tag --yes || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create latest release
+        run: |
+          gh release create latest dist/* \
+            --title "Latest Skills" \
+            --notes "Auto-packaged skill files from the latest \`main\` branch.
+
+          Download individual \`.skill\` files or grab \`all-skills.zip\` for everything.
+
+          _Updated: $(date -u '+%Y-%m-%d %H:%M UTC')_" \
+            --latest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
