@@ -1,14 +1,15 @@
+---
+name: onboard
+description: >
+  Automated codebase onboarding that generates or augments AGENTS.md files and
+  ./bin/verify scripts. Use when entering a new codebase for the first time, a
+  repo has no AGENTS.md or CLAUDE.md, existing AGENTS.md may be stale or
+  incomplete, or setting up a monorepo with multiple packages.
+---
+
 # Codebase Onboarding (onboard)
 
 Generate or augment an AGENTS.md file and a `./bin/verify` script for any codebase. This skill scans the project, discovers tooling, validates commands, and produces documentation that helps AI agents (and humans) work effectively in the repo.
-
-## Trigger
-
-Use this skill when:
-- Entering a new codebase for the first time
-- A repo has no AGENTS.md or CLAUDE.md
-- Existing AGENTS.md may be stale or incomplete
-- Setting up a monorepo with multiple packages
 
 ## Workflow
 

@@ -1,14 +1,16 @@
+---
+name: verify
+description: >
+  Structured verification workflow before commits and PRs. Use when about to
+  commit or push a meaningful change, preparing a pull request, asked to verify
+  that changes don't break anything, or after completing a feature or bug fix.
+  Classifies change types, selects verification level, generates evidence, and
+  integrates with existing PR templates.
+---
+
 # Verification Workflow (verify)
 
 Run structured verification before committing or opening a PR. This skill classifies the change type, selects the appropriate verification level, generates evidence, and integrates with existing PR templates.
-
-## Trigger
-
-Use this skill when:
-- About to commit or push a meaningful change
-- Preparing a pull request
-- Asked to verify that changes don't break anything
-- After completing a feature or bug fix
 
 ## Workflow
 
