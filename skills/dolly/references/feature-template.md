@@ -51,8 +51,12 @@ Status: PENDING
 ## Checklist
 - [ ] `design.md` exists with all required sections
 - [ ] Build strategy is specified as `parallel` or `direct` with rationale
+- [ ] Error & validation patterns section documents codebase discoveries
 - [ ] `etr.md` exists with at least 3 falsifiable claims
+- [ ] ETR claims describe BEHAVIOR not EXISTENCE (each answers: When? What? Where? How?)
 - [ ] Falsification section contains specific, testable claims
+- [ ] If feature has UI: user flows documented (happy path, validation error, server error)
+- [ ] If feature has forms: form validation rules table is present
 - [ ] Design references existing codebase patterns (not greenfield assumptions)
 
 ## Rationale
@@ -75,9 +79,13 @@ Status: PENDING
 ## Checklist
 - [ ] Acceptance tests exist in `verify/`
 - [ ] All ETR claims have corresponding tests
+- [ ] Tests verify BEHAVIOR (observable outcomes), not just existence or invocation
 - [ ] `etr.md` Status column updated to TESTED for covered claims
 - [ ] Tests are executable and currently RED
 - [ ] Tests target falsification (not just happy path)
+- [ ] If feature has UI: tests cover user interaction flows
+- [ ] If feature has forms: tests cover field validation for valid AND invalid input
+- [ ] If feature has error states: each error state has a test for its UI rendering
 
 ## Rationale
 
@@ -97,10 +105,14 @@ Status: PENDING
 Status: PENDING
 
 ## Checklist
-- [ ] All acceptance tests in `verify/` are GREEN
+- [ ] Builder submitted a Completeness Report
+- [ ] All acceptance tests in `verify/` are GREEN (each file confirmed)
+- [ ] All ETR claims mapped to at least one GREEN test
 - [ ] Implementation follows `design.md` contracts
 - [ ] No spec/gate/evidence files were modified by the builder
 - [ ] Unit tests exist for non-trivial logic
+- [ ] If feature has UI: every user flow in design.md is implemented end-to-end
+- [ ] If feature has forms: all form fields have client-side and server-side validation wired
 
 ## Rationale
 
@@ -119,8 +131,11 @@ Status: PENDING
 Status: PENDING
 
 ## Checklist
-- [ ] `review-bundle.md` exists with audit findings
+- [ ] `review-bundle.md` exists with audit findings (includes UI & User Experience section)
 - [ ] No contract weakening detected
+- [ ] User perspective audit completed: objective identified, all entry points mapped
+- [ ] All user flows walked step-by-step — no dead ends or inaccessible paths
+- [ ] Error messages are plain language with recovery guidance
 - [ ] `/simplify` review completed, issues addressed
 - [ ] All acceptance tests still GREEN after Ship-phase changes
 - [ ] Feature is ready to merge

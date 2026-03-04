@@ -82,3 +82,61 @@ Once a claim survives falsification (test goes GREEN), that test becomes a
 permanent guard. During Ship, the auditor checks for "test graduation" — if
 acceptance test assertions were weakened to make them pass, that's contract
 weakening, not genuine survival. The original assertion must be preserved.
+
+---
+
+## Behavior Claims vs Existence Claims
+
+A critical failure mode for ETR claims is the **existence claim** — a claim
+that asserts something *is present* rather than *behaves correctly*.
+
+### The Distinction
+
+**Existence claim**: "The form has validation"
+- Can be satisfied by an empty `validate()` function
+- Tells us nothing about whether validation works
+- Cannot be meaningfully falsified
+
+**Behavior claim**: "Submitting the form with an empty email field displays
+'Enter a valid email address' below the email input and prevents submission"
+- Specifies the condition (empty email)
+- Specifies the observable outcome (error message, location, blocked submission)
+- Can be directly tested and falsified
+
+### The Behavior Claim Test
+
+Every ETR claim must be answerable with: "I could write a test that either
+confirms or disproves this claim." If you can't, the claim needs revision.
+
+Ask four questions of every claim:
+
+| Question  | What it requires |
+|-----------|-----------------|
+| **When?** | Under what input or condition? |
+| **What?** | What does the system do? (specific action, not "works") |
+| **Where?** | For UI: where does the user see the outcome? |
+| **How?** | What is the measurable threshold or observable state? |
+
+### UI-Specific Behavior Claim Examples
+
+| Weak (Existence)                    | Strong (Behavior)                                                                              |
+|-------------------------------------|-----------------------------------------------------------------------------------------------|
+| "Email validation exists"           | "Submitting with a malformed email shows 'Enter a valid email address' inline below the email field; submission is blocked" |
+| "Server errors are handled"         | "When the server returns 500, the form shows 'Something went wrong. Try again.' in the top-level banner; user's input is preserved" |
+| "Loading state is shown"            | "While the form is submitting, the submit button is disabled and shows a spinner; all fields are read-only" |
+| "Auth is checked"                   | "Accessing `/settings` without a valid session redirects to `/login?returnTo=/settings`" |
+| "The component renders"             | "On initial load, the email field is empty, the submit button is disabled, no error messages are visible" |
+| "Error handling is implemented"     | "An API timeout after 10s shows 'Request timed out. Check your connection.' and re-enables the submit button" |
+
+### Why This Matters
+
+Existence claims create a false sense of coverage. A spec full of existence
+claims will pass gate validation while describing a system that could have no
+working behavior at all. The ETR must describe what the system *does*, not
+what it *has*.
+
+When reviewing ETR claims in Gate 1 validation, reject any claim that:
+- Uses passive voice without a subject: "errors are handled" (by whom? how?)
+- States presence without behavior: "validation is present", "auth exists"
+- Omits the observable outcome: "the form validates correctly"
+- Cannot be directly translated into a test assertion
